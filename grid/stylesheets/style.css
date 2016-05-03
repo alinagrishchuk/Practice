@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+}
+
+/* CSS Grid 940 = 12 *60 + 11 * 20 */
+.container {
+    width: 940px;
+    margin: 0 auto;
+}
+.row {
+    margin-bottom: 20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+[class*="span"] {
+    float: left;
+    margin-right: 20px;
+    display: inline;
+}
+
+[class*="span"]:last-child {
+    margin-right: 0;
+    float: right;
+}
+.span1 { width: 60px; }
+.span2 { width: 140px;}
+.span3 { width: 220px;}
+.span4 { width: 300px;}
+.span5 { width: 380px;}
+.span6 { width: 460px;}
+.span7 { width: 540px;}
+.span8 { width: 620px;}
+.span9 { width: 700px;}
+.span10 { width: 780px;}
+.span11 { width: 860px;}
+.span12 { width: 940px;}
+
+.offset1 { margin-left: 60px; }
+.offset2 { margin-left: 140px;}
+.offset3 { margin-left: 220px;}
+.offset4 { margin-left: 300px;}
+.offset5 { margin-left: 380px;}
+.offset6 { margin-left: 460px;}
+.offset7 { margin-left: 540px;}
+.offset8 { margin-left: 620px;}
+.offset9 { margin-left: 700px;}
+.offset10 { margin-left: 780px;}
+.offset11 { margin-left: 860px;}
+.offset12 { margin-left: 940px;}
+
+/* Main CSS */
+
+body {
+    background-image: url("../images/ignasi_pattern_s.png");
+    font: 1em 'Arial';
+}
+
+.header h1 {
+    margin-top: 0;
+}
+.search, .header {
+    margin-top: 40px;
+}
+.search input {
+    width: 100%;
+}
+.slider {
+    height: 250px;
+    background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/disp/3d73ad24329530.56049e2c1ef90.JPG");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+}
+
+.thumb {
+    box-shadow: 0 3px 5px rgba(11, 15, 11, 0.3);
+    height: 100px;
+}
+.sidebar {
+    padding-top: 30px;
+}
+
+.sidebar nav ul {
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 3px 5px rgba(11, 15, 11, 0.3);
+    list-style: none;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #eee;
+    background-color: #bbb;
+    display: block;
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 1px;
+}
+.sidebar nav ul li a:hover {
+    color: #FFF;
+}
+.content {
+    padding: 0 20px;
+    text-align: justify;
+    line-height: 1.4em;
+}
+.footer {
+    color: #444;
+    text-align: center;
+    border-top: 1px dashed #888;
+    padding: 20px 0;
+}
+
+@media only screen and (max-width: 939px) {
+    .container {
+        width: 100%;
+    }
+    [class*="span"] {
+        width: 100%;
+    }
+    .sidebar, .thumb, .search {
+        display: none;
+    }
+    .header h1:before {
+        content: "Mobile ";
+    }
+}
