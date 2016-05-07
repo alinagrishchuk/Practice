@@ -7,15 +7,19 @@ class GoodnessValidator < ActiveModel::Validator
 end
 
 class Person < ActiveRecord::Base
+  has_one :account
+  has_many :children, class_name: 'Person', foreign_key: 'parent_id'
+  belongs_to :parent, class_name: 'Person'
+
+
   validates :name, presence: true
-  validates :email, uniqueness: true
   validates :terms_of_service, acceptance: true
   validates_with GoodnessValidator, fields: [:name,]
   validates :name, length: {minimum: 5}, if: :long_email?
 
   with_options if: :long_email? do |person|
-    person.validates :email_confirmation, presence: true
-    person.validates :email, confirmation: true
+    person.validates :email_confirmation, presence: true, on: :create
+    person.validates :email, confirmation: true, on: :create
   end
 
   before_create do
@@ -24,7 +28,6 @@ class Person < ActiveRecord::Base
 
   after_initialize do
     self.name = "test name" unless !self.name.blank?
-    self.email= "testemail@test.com" if self.email.blank?
   end
 
 

@@ -1,5 +1,6 @@
 class Category < ActiveRecord::Base
-  has_many :products, dependent: :destroy
+  has_and_belongs_to_many :products
+
   validates :name, exclusion: {in: %w{staff}}
   validates :name, format: {with: /[A-Z]\w+/}
   validates :name, :description, length: {minimum: 5}

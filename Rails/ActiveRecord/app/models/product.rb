@@ -12,7 +12,7 @@ end
 
 class Product < ActiveRecord::Base
   belongs_to :product_type
-  has_many :categories
+  has_and_belongs_to_many :categories
 
   validates :product_type, presence: true
   validates :size, inclusion: {in: %w(small medium large),
