@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507100317) do
+ActiveRecord::Schema.define(version: 20160507122629) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -28,13 +28,30 @@ ActiveRecord::Schema.define(version: 20160507100317) do
   add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id"
   add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id"
 
-  create_table "products", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.text     "part_number"
-    t.decimal  "price",       precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "email"
   end
+
+  create_table "product_types", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name",                                    null: false
+    t.text     "description"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.text     "part_number"
+    t.decimal  "price",           precision: 5, scale: 2
+    t.string   "size"
+    t.integer  "product_type_id"
+  end
+
+  add_index "products", ["product_type_id"], name: "index_products_on_product_type_id"
 
 end
