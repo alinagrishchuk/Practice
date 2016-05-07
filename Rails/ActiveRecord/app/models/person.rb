@@ -18,10 +18,20 @@ class Person < ActiveRecord::Base
     person.validates :email, confirmation: true
   end
 
+  before_create do
+    self.name.capitalize!
+  end
+
+  after_initialize do
+    self.name = "test name" unless !self.name.blank?
+    self.email= "testemail@test.com" if self.email.blank?
+  end
+
 
   def long_email?
-    email.length > 5
+    email.length > 5 unless email.nil?
   end
+
 end
 
 
