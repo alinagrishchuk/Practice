@@ -2,7 +2,8 @@
 @import "bootstrap/theme";
 
 .social {
-  background: image-url('logos.png') no-repeat transparent;
+  background: url('logos.png') no-repeat;
+  background-size: contain;
   display: inline-block;
 
   &.facebook, &.facebook:active {

@@ -5,5 +5,13 @@
     <h4 class="media-heading"><%= link_to comment.user.name, comment.user.profile_url, target: '_blank' %> says
       <small class="text-muted">[at <%= comment.created_at.strftime('%-d %B %Y, %H:%M:%S') %>]</small></h4>
     <p><%= comment.body %></p>
+
   </div>
+  <% if comment.user_id == current_user.id %>
+    <div class="media-right">
+      <%= button_to 'delete',comment, method: :delete, class:"btn btn-danger" %>
+    </div>
+  <% end %>
+
+
 </li>
