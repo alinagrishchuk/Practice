@@ -5,3 +5,6 @@
 - Comments should be posted and received instantly (well, nearly instantly), without any page reloads.
 - Empty and very long comments are not permitted.
 - When users enters the chat, they should be able to read some comments that were posted previously. Old comments should be removed automatically.
+
+**Demo**
+ http://web-chat-application.herokuapp.com/
