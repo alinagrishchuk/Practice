@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if current_user && @comment.user == current_user
         @comment.destroy
-        flash[:success] = 'Comment was successfully destroyed.'
+        flash.now[:success] = 'Comment was successfully destroyed.'
         format.html { redirect_to  root_url}
         format.js
       else

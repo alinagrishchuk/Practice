@@ -1,1 +1,7 @@
-$("#result").text("delated");
+publisher = client.publish('/comments/broadcast', {
+  message: '$("#comment<%=@comment.id%>").hide()'
+});
+
+publisher.errback(function() {
+  alert('There was an error while posting your comment.');
+});

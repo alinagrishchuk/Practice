@@ -1,4 +1,4 @@
-<li class="media comment">
+<li class="media comment" id="comment<%=comment.id %>">
   <%= link_to image_tag(comment.user.avatar_url, alt: comment.user.name, class: "media-object"),
               comment.user.profile_url, target: '_blank', class: 'pull-left' %>
   <div class="media-body">
@@ -9,7 +9,7 @@
   </div>
   <% if comment.user_id == current_user.id %>
     <div class="media-right">
-      <%= button_to 'delete',comment, method: :delete, class:"btn btn-danger" %>
+      <%= button_to 'delete',comment, method: :delete, class:"btn btn-danger", remote: true %>
     </div>
   <% end %>
 
