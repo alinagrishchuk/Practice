@@ -2,4 +2,13 @@
 
 require ::File.expand_path('../config/environment', __FILE__)
 require 'bootstrap-sass' #require statement of bootstrap-sass
+
+if Rails.env.development?
+  console = ActiveSupport::Logger.new($stdout)
+  console.formatter = Rails.logger.formatter
+  console.level = Rails.logger.level
+
+  Rails.logger.extend(ActiveSupport::Logger.broadcast(console))
+end
+
 run Rails.application

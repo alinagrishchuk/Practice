@@ -18,3 +18,7 @@
 //= require faye
 //= require comments
 //= require_tree .
+
+window.client = new Faye.Client('/faye');
+
+

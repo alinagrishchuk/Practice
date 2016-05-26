@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#auth_fail'
   get '/sign_out', to: 'sessions#destroy', as: :sign_out
 
+  resources :users
   resources :comments, only: [:new, :create, :destroy, :broadcast]
   root to: 'comments#new'
   # The priority is based upon order of creation: first created -> highest priority.

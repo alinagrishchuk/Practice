@@ -1,4 +1,3 @@
-window.client = new Faye.Client('/faye')
 
 jQuery ->
   client.subscribe '/comments', (payload) ->

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+<section class="title">
+  <h1>Listing Users</h1>
+</section>
+<section class="users">
+  <ol class="list-group">
+    <% @users.each do |user| %>
+        <li class="list-group-item clearfix">
+
+          <div class="btn-group pull-right">
+            <%= link_to 'Show', user, :class => "btn btn-default" %>
+            <%= link_to 'Edit', edit_user_path(user),   :class => "btn btn-primary"%>
+            <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' },  :class => "btn btn-primary" %>
+          </div>
+
+          <h4 class="list-group-item-heading">
+            <a href=<%=user.link %>><%= user.first_name %><%= user.last_name %></a>
+          </h4>
+          <h5><%=user.email %></h5>
+        </li>
+    <% end %>
+  </ol>
+
+</section>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>

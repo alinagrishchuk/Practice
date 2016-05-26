@@ -10,6 +10,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require 'eventmachine'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -32,7 +33,40 @@ module ChatApp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.middleware.delete Rack::Lock
-    config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25
+    config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25 do |faye|
+      faye.on :handshake do |client_id|
+        Rails.logger.info "[Faye Event] Client #{client_id} connected"
+        EM.run {
+          client = Faye::Client.new('http://localhost:3000/faye')
+          client.publish('/test', 'text' => 'Hello world')
+        }
+      end
+
+      faye.on :subscribe do |client_id, channel|
+        Rails.logger.info "[Faye Event] Client #{client_id} subscribe to the #{channel}"
+      end
+
+      faye.on :unsubscribe do |client_id, channel|
+        Rails.logger.info "[Faye Event] Client #{client_id} unsubscribe to the #{channel}"
+      end
+
+      faye.on :unsubscribe do |client_id, channel|
+        Rails.logger.info "[Faye Event] Client #{client_id} unsubscribe to the #{channel}"
+      end
+
+      faye.on :publish do |client_id, channel, data|
+        Rails.logger.info "[Faye Event] Client #{client_id} publish #{data.inspect} to the #{channel}"
+        EM.run {
+          client = Faye::Client.new('http://localhost:3000/faye')
+          client.publish('/test', "Hello, from server! response to #{data}")
+        }
+      end
+
+      faye.on :disconnect do |client_id|
+        Rails.logger.info "[Faye Event] Client #{client_id} disconnected"
+      end
+
+    end
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
