@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z]+)*\.[a-zA-Z]+\z/i
 
   validates :email, presence: true,
                     format: { with: VALID_EMAIL_REGEX },
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
                     length: {maximum: 50}
   validates :password, length: {minimum: 6}
 
-  before_save { self.email = email.downcase }
+  before_save { self.email.downcase! }
   has_secure_password
 
 end
