@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
-  has_many :microposts
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  attr_accessor :name, :email
+  validates :email, presence: true,
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+  validates :name, presence: true,
+                    length: {maximum: 50}
+  validates :password, length: {minimum: 6}
 
-  def initialize(attributes = {})
-    @name  = attributes[:name]
-    @email = attributes[:email]
-  end
+  before_save { self.email = email.downcase }
+  has_secure_password
 
-  def formatted_email
-    "#{@name} <#{@email}>"
-  end
 end
