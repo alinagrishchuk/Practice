@@ -12,7 +12,14 @@ describe User  do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:remember_token) }
 
+  describe "remember token" do
+    before { @user.save }
+    it "should have a nonblank remember token" do
+      expect(@user.remember_token).not_to be_blank
+    end
+  end
 
   describe "when email is not present" do
     before { @user.email = '' }
@@ -49,6 +56,7 @@ describe User  do
     before do
       user_with_same_email = @user.dup
       user_with_same_email.save
+      @user.save
     end
     it { should_not be_valid }
   end
@@ -86,9 +94,11 @@ describe User  do
 
   describe "email address with mixed case" do
     let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
+    before do
+      @user.email = mixed_case_email
+      @user.save
+    end
       it "should be saved as all lower-case " do
-        @user.email = mixed_case_email
-        @user.save
         expect(@user.reload.email).to eq mixed_case_email.downcase
       end
   end
