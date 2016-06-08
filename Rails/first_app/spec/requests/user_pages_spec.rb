@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'User pages' do
+describe 'User pages', type: :request do
   subject { page }
 
   describe 'signup page' do
@@ -49,10 +49,18 @@ describe 'User pages' do
 
   describe 'profile page' do
     let(:user) { FactoryGirl.create(:user) }
+    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: 'Foo') }
+    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: 'Bar') }
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(full_title(user.name)) }
+
+    describe 'microposts' do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.microposts.count) }
+    end
   end
 
   describe 'edit' do
@@ -82,7 +90,7 @@ describe 'User pages' do
         fill_in 'Name',             with: new_name
         fill_in 'Email',            with: new_email
         fill_in 'Password',         with: user.password
-        fill_in 'Confirm Password', with: user.password
+        fill_in 'Confirmation',     with: user.password
         click_button 'Save changes'
       end
 
@@ -92,6 +100,9 @@ describe 'User pages' do
       specify { expect(user.reload.name).to  eq new_name }
       specify { expect(user.reload.email).to eq new_email }
     end
+
+
+
   end
 
   describe 'index' do
