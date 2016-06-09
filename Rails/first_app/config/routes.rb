@@ -10,9 +10,13 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
 
   resources :microposts, only: [:create, :destroy]
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
-
+  resources :relationships, only: [:create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
