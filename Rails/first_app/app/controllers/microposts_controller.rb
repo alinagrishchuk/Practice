@@ -15,7 +15,10 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    redirect_to root_url
+    respond_to do |format|
+      format.json { render json: { post_count: current_user.microposts.count }}
+      format.html { redirect_to root_url }
+    end
   end
 
   private

@@ -1,0 +1,15 @@
+$(document).ready(function () {
+  $(".js-remove-micropost").click(function () {
+    var curr_micropost = $(this).parents('li')[0];
+    $.ajax({
+      url: '/microposts/' + $(curr_micropost).attr('data-micropost_id'),
+      type: 'POST',
+      data: { _method: 'DELETE' },
+      success: function (result) {
+        $(curr_micropost).hide();
+        var micropoct_count = "Microposts (" + result.post_count + ")";
+        $($(".microposts").parent().children("h3")[0]).text(micropoct_count);
+      }
+    });
+  });
+});

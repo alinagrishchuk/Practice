@@ -38,3 +38,5 @@ describe RelationshipsController, :type => :controller do
   end
 
 end
+
+

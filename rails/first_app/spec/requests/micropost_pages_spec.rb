@@ -30,14 +30,16 @@ RSpec.describe 'Micropost pages', type: :request do
   end
 
   describe 'micropost destruction' do
-    before { FactoryGirl.create(:micropost, user: user) }
+    let!(:micropost) { FactoryGirl.create(:micropost, user: user) }
 
     describe 'as correct user' do
       before { visit user_path(user) }
 
       it 'should delete a micropost' do
         expect { click_link 'delete' }.to change(Micropost, :count).by(-1)
+        #expect { first('.js-remove-micropost').click }.to change(Micropost, :count).by(-1)
       end
+
     end
   end
 end

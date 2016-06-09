@@ -192,6 +192,5 @@ describe User  do
       subject { other_user }
       its(:followers) { should include(@user) }
     end
-
   end
 end
