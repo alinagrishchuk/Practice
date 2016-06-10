@@ -8,7 +8,33 @@
 </head>
 <body>
 <%= render 'shared/navigation' %>
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-primary" id="panels">
+        <div class="panel-heading">Food Preferences</div>
+        <%  @food_preferences.each do |fp| %>
+            <div class="panel-body"><%= fp.name %></div>
+        <% end %>
+      </div>
+      <div class="panel panel-primary" id="panels">
+        <div class="panel panel-heading">Food Type</div>
+        <% @food_types.each do |ft| %>
+            <div class="panel-body"><%= ft.name %></div>
+        <% end %>
+      </div>
+      <div class="panel panel-primary" id="panels">
+        <div class="panel panel-heading">Cuisine</div>
+        <% @cuisines.each do |c| %>
+            <div class="panel-body"><%= c.name %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

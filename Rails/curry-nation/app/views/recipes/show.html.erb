@@ -1,44 +1,55 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <%= @recipe.title %>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <p class="text-muted">Ingredients:</p>
+        <%= @recipe.ingredients %>
+      </div>
+      <div class="col-md-6">
+        <ul>
+          <li>
+            <p>
+              <span class="text-muted">Preference:</span>
+              <%= @recipe.food_preference.name %>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="text-muted">Type:</span>
+              <%= @recipe.food_type.name%>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="text-muted">Cuisine:</span>
+              <%= @recipe.cuisine.name %>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="text-muted">Cooking time:</span>
+              <%= @recipe.cooking_time %>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="text-muted">Level of difficulty</span>
+              <%= @recipe.difficulty_level %>
+            </p>
+          </li>
+        </ul>
 
-<p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
-</p>
-
-<p>
-  <strong>Cooking time:</strong>
-  <%= @recipe.cooking_time %>
-</p>
-
-<p>
-  <strong>Difficulty level:</strong>
-  <%= @recipe.difficulty_level %>
-</p>
-
-<p>
-  <strong>Food type:</strong>
-  <%= @recipe.food_type_id %>
-</p>
-
-<p>
-  <strong>Food preference:</strong>
-  <%= @recipe.food_preference_id %>
-</p>
-
-<p>
-  <strong>Cuisine:</strong>
-  <%= @recipe.cuisine_id %>
-</p>
-
-<p>
-  <strong>Ingredients:</strong>
-  <%= @recipe.ingredients %>
-</p>
-
-<p>
-  <strong>Procedure:</strong>
-  <%= @recipe.procedure %>
-</p>
+      </div>
+    </div>
+    <p class="text-muted">Procedure:</p>
+    <%= @recipe.procedure %>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>

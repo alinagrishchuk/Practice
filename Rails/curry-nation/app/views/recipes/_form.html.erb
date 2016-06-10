@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control"%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :cooking_time %><br>
-    <%= f.text_field :cooking_time %>
+    <%= f.text_field :cooking_time, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :difficulty_level %><br>
@@ -41,15 +41,15 @@
                  options_from_collection_for_select(Cuisine.all, :id, :name),
                  { promt: 'Please Choose' }, class: 'form-control')%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :ingredients %><br>
-    <%= f.text_area :ingredients %>
+    <%= f.text_area :ingredients, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :procedure %><br>
-    <%= f.text_area :procedure %>
+    <%= f.text_area :procedure, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-success" %>
   </div>
 <% end %>
