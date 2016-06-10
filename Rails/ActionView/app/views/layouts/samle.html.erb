@@ -5,13 +5,14 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <%= yield :special_script %>
 </head>
 <body>
-<% @menu = "Title text"; @item = "Some value" %>
-<%= render partial: 'shared/menu', object: @item, as: "value" %>
-<%= yield :head %>
-<%= yield %>
-
+  <div class="row">
+    <div class="col-md-8">
+      <div class="alert alert-success" role="alert">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

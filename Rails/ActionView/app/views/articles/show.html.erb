@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+<%= render(partial: 'article', layout: 'box', locals: { article: @article }) %>
+<% content_for :special_script do %>
+    <script>alert('Hello!')</script>
+<% end %>
