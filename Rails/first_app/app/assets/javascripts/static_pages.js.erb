@@ -1,0 +1,26 @@
+$(document).ready(function() {
+  $("#micropost_content").bind({
+
+    input: validate_chars_count
+  });
+});
+
+function validate_chars_count(event) {
+  console.log(event.type);
+  var max_lenght = 140;
+  var micropost = $("#micropost_content").val();
+  var length_left =
+    max_lenght - micropost.length;
+  if(length_left <= 0 ){
+    length_left = 0;
+    micropost = micropost.substring(0,max_lenght);
+    /* $("#micropost_content").val(micropost);*/
+  }
+  var message = "Characters left.." + length_left;
+  $("#new_micropost span").text(message);
+  console.log($("#micropost_content").val().length);
+}
+
+
+
+
