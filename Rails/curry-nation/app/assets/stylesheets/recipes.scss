@@ -8,3 +8,14 @@
     height: 40px;
   }
 }
+
+.js-type-click:hover {
+  cursor: pointer;
+  color:  #337ab7;
+  background-color: #eee;
+}
+
+.selected,.selected:hover {
+  background-color: #5cb85c;
+  color: #FFF;
+}

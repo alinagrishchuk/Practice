@@ -8,5 +8,6 @@ class ApplicationController < ActionController::Base
     @food_preferences = FoodPreference.limit(10)
     @food_types = FoodType.limit(10)
     @cuisines = Cuisine.limit(10)
+    @difficulty = Recipe::DIFFICULTY
   end
 end

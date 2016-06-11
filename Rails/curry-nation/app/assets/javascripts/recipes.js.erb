@@ -1,0 +1,53 @@
+$(function () {
+  $("#recipes .pagination a").on('click',function () {
+    $.getScript(this.href);
+    return false;
+  });
+
+  function initParams(object){
+    var params = {};
+    params.search_string = $("#search").val();
+    if (object) {
+      params.search_by_type = object;
+    }
+    console.log(params);
+    return params;
+  }
+
+  $("#recipes_search").submit(function () {
+    $.get('/recipes',initParams(),null, 'script');
+    return false;
+  });
+
+  $("#recipes_search input").keyup(function () {
+    $.get('/recipes', initParams(), null, 'script');
+    return false;
+  });
+
+  $(".js-type-click").on('click', function () {
+    if ( $(this).hasClass('selected') ) {
+
+      $(".panel-body").removeClass('selected');
+      $(this).find('input').prop("checked", false);
+
+      $.get('/recipes',initParams(), null, 'script');
+    }
+    else {
+      $(".panel-body").removeClass('selected');
+      $(".panel-body").find('input').each(function(){
+          $(this).prop("checked", false);
+        });
+      $(this).find('input').prop("checked", true);
+      $(this).addClass('selected');
+
+      var params = {
+          type: $(this).attr('data-type'),
+          id: $(this).attr('data-id')
+      };
+      console.log(params);
+      $.get('/recipes', initParams(params), null, 'script');
+    }
+    return false;
+  });
+
+});

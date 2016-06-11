@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Time</th>
+      <th>Difficulty</th>
+      <th>Type</th>
+      <th>Preference</th>
+      <th>Cuisine</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @recipes.each do |recipe| %>
+        <tr>
+          <td><%= recipe.title %></td>
+          <td><%= recipe.cooking_time %></td>
+          <td><%= recipe.difficulty_level %></td>
+          <td><%= recipe.food_type.name %></td>
+          <td><%= recipe.food_preference.name %></td>
+          <td><%= recipe.cuisine.name %></td>
+          <td><%= link_to 'Show', recipe, :class=>"btn btn-primary btn-small"%></td>
+          <% if user_signed_in? %>
+              <td><%= link_to 'Edit', edit_recipe_path(recipe),
+                              :class=>"btn btn-success btn-small"%></td>
+              <td><%= link_to 'Delete', recipe, method: :delete,
+                              data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-small" %></td>
+          <%end%>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= will_paginate @recipes %>
+  <br>
+</div>

@@ -12,21 +12,37 @@
   <div class="row">
     <div class="col-md-3">
       <div class="panel panel-primary" id="panels">
+        <div class="panel-heading">Difficulty</div>
+        <% @difficulty.each do |d| %>
+            <div class="panel-body js-type-click" data-type="difficulty_level" data-id="<%= d %>">
+              <label class="radio-inline ">
+                <%= radio_button_tag :difficulty_level, d %> <%= d %>
+              </label>
+            </div>
+        <% end %>
+      </div>
+      <div class="panel panel-primary" id="panels">
         <div class="panel-heading">Food Preferences</div>
         <%  @food_preferences.each do |fp| %>
-            <div class="panel-body"><%= fp.name %></div>
+            <div class="panel-body js-type-click" data-type="food_preference_id" data-id="<%= fp.id %>">
+              <%= fp.name %>
+            </div>
         <% end %>
       </div>
       <div class="panel panel-primary" id="panels">
         <div class="panel panel-heading">Food Type</div>
         <% @food_types.each do |ft| %>
-            <div class="panel-body"><%= ft.name %></div>
+            <div class="panel-body js-type-click" data-type="food_type_id" data-id="<%= ft.id %>">
+              <%= ft.name %>
+            </div>
         <% end %>
       </div>
       <div class="panel panel-primary" id="panels">
         <div class="panel panel-heading">Cuisine</div>
         <% @cuisines.each do |c| %>
-            <div class="panel-body"><%= c.name %></div>
+            <div class="panel-body js-type-click" data-type="cuisine_id" data-id="<%= c.id %>">
+              <%= c.name %>
+            </div>
         <% end %>
       </div>
     </div>
@@ -35,6 +51,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>
