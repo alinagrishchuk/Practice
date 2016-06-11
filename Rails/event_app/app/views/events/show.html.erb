@@ -3,6 +3,11 @@
 <div class="panel panel-success">
   <div class="panel-heading"><%= @event.title %></div>
   <div class="panel-body">
+
+    <label>Organized By:</label><br/>
+      <%= image_tag avatar_url(@event.organizer) %>
+      <%= @event.organizer.email %>
+      <br/>
     <div>
       <strong>Start date</strong>
       <%= l @event.start_date, format: :date_format %>
