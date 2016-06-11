@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!
   before_action :event_owner!, only: [:edit, :update, :destroy]
 
+  respond_to :html
   # GET /events
   # GET /events.json
   def index
@@ -44,9 +45,7 @@ class EventsController < ApplicationController
       end
     end
   end
-
-
-
+  
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
@@ -71,6 +70,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def join
+    @event = Event.find(params[:event_id])
+    @attendance =
+        Attendance.join_event(current_user.id,
+                              params[:event_id], 'request_sent')
+    respond_to do |format|
+      format.html { redirect_to @event, notice: 'Resuest Send' }
+      format.json { render :show, status: :created, location: @event }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -92,3 +102,4 @@ class EventsController < ApplicationController
       end
     end
 end
+

@@ -5,6 +5,8 @@ class Event < ActiveRecord::Base
   belongs_to :organizer, class_name: 'User'
   has_many :taggings
   has_many :tags, through: :taggings
+  has_many :attendances
+  has_many :users, :through => :attendances
 
   def slug_candidates
     [:title,  [:title, :location], ]

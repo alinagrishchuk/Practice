@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :events
   get 'tags/:tag', to: 'events#index', as: :tag
+  resources :events do
+    get :join, to: 'events#join', as: 'join'
+ end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
