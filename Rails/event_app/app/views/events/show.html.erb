@@ -1,39 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+<div class="panel panel-success">
+  <div class="panel-heading"><%= @event.title %></div>
+  <div class="panel-body">
+    <div>
+      <strong>Start date</strong>
+      <%= l @event.start_date, format: :date_format %>
+    </div>
+    <div>
+      <strong>End date</strong>
+      <%= l @event.end_date, format: :date_format %>
+    </div>
+    <div>
+      <strong>Location</strong>
+      <%= @event.location %>
+    </div>
+    <div><strong>Agenda</strong>
+      <%= @event.agenda %>
+    </div>
+    <div>
+      <strong>Address</strong>
+      <%= @event.address %>
+    </div>
+    <div>
+      <strong>Organizer</strong>
+      <%= @event.organizer_id %>
+    </div>
+    <%=raw @event.tags.map { |t| link_to t.name, tag_path(t.name) }.join(', ') unless @event.all_tags.blank? %>
+  </div>
+</div>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Agenda:</strong>
-  <%= @event.agenda %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @event.address %>
-</p>
-
-<p>
-  <strong>Organizer:</strong>
-  <%= @event.organizer_id %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_event_path(@event), class: 'btn' %> |
+<%= link_to 'Back', events_path %> |
+<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>

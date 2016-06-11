@@ -6,7 +6,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    if params[:tag]
+      @events = Event.tagged_with(params[:tag])
+    else
+      @events = Event.all
+    end
+
   end
 
   # GET /events/1
@@ -38,6 +43,8 @@ class EventsController < ApplicationController
       end
     end
   end
+
+
 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
@@ -71,16 +78,16 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :start_date, :end_date, :location, :agenda, :address, :organizer_id)
+      params.require(:event).permit(:title, :start_date, :end_date,
+                                    :location, :agenda, :address,
+                                    :organizer_id, :all_tags)
     end
 
     def event_owner!
-
       authenticate_user!
       if @event.organizer_id != current_user.id
         redirect_to events_path
         flash[:notice] =  'You do not have enough permissions to do this'
       end
-
     end
 end

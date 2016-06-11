@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 >
+      <%= event.title %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div>
+      <strong>Start date</strong>
+      <%= l event.start_date, format: :date_format %>
+      <strong>End date</strong>
+      <%= l event.end_date, format: :date_format %>
+    </div>
+    <div>
+      <strong>Location</strong>
+      <%= event.location %>
+    </div>
+    <div>
+      <strong>Address</strong>
+    </div>
+    <div>
+      <%= event.address %>
+    </div>
+    <div>
+      <strong>Agenda</strong>
+      <%= event.agenda %>
+    </div>
+    <div>
+      <strong>Organizer</strong>
+      <%= event.organizer_id %>
+    </div>
+    <%=raw event.tags.map { |t| link_to t.name, tag_path(t.name) }.join(', ') unless event.all_tags.blank? %>
+    <div class="pull-right">
+      <%= link_to 'Show', event, class: 'btn btn-info' %>
+      <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-primary' %>
+      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
