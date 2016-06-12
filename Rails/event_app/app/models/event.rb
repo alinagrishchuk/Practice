@@ -26,6 +26,13 @@ class Event < ActiveRecord::Base
     Tag.find_by_name!(name).events
   end
 
+  def self.contain_tag(name)
+    name = "%#{name}%"
+    tag_ids = "SELECT id FROM tags WHERE (name like :name)"
+    event_ids = "SELECT event_id FROM taggings where tag_id in (#{tag_ids})"
+    Event.where("id in (#{event_ids})", name: name)
+  end
+
   def self.tag_counts
     Tag.select("tags.name, count(taggings.tag_id) as count").
         joins(:taggings).group("taggings.tag_id")

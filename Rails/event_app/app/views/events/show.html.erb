@@ -1,5 +1,5 @@
 <%= link_to "Join", event_join_path(event_id: @event.id),
-            :class=>"btn btn-success btn-lg pull-right" %>
+            :class=>"btn btn-success btn-lg pull-right" unless @event.organizer_id == current_user.id %>
 <h1 class="text-center">
   <small>
     <label><%= @event.title %></label>

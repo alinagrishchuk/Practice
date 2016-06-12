@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :events
+  get :my_events, to: 'events#my_events', as: 'my_events'
   get 'tags/:tag', to: 'events#index', as: :tag
   resources :events do
     get :join, to: 'events#join', as: 'join'
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root to:'events#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

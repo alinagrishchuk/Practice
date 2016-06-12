@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event_by_id, only:[:accept_request, :reject_request]
   before_filter :authenticate_user!
   before_action :event_owner!, only: [:edit, :update, :destroy]
+  before_action :not_event_owner!, only: [:join]
 
   respond_to :html
   # GET /events
@@ -11,6 +12,8 @@ class EventsController < ApplicationController
   def index
     if params[:tag]
       @events = Event.tagged_with(params[:tag])
+    elsif params[:search]
+      @events = Event.contain_tag(params[:search])
     else
       @events = Event.all
     end
@@ -96,8 +99,7 @@ class EventsController < ApplicationController
   end
 
   def reject_request
-    @attendance =
-        Attendance.where(params[:attendance_id]) rescue nil
+    @attendance = Attendance.find_by(id: params[:attendance_id]) rescue nil
     @attendance.reject!
     'Applicant Rejected' if @attendance.save
     respond_to do |format|
@@ -105,6 +107,11 @@ class EventsController < ApplicationController
       format.json { render :show, status: :created, location: @event }
     end
   end
+
+  def my_events
+    @events = current_user.organized_events
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -120,14 +127,26 @@ class EventsController < ApplicationController
 
     def event_owner!
       authenticate_user!
-      if @event.organizer_id != current_user.id
+      unless is_owner?
         redirect_to events_path
         flash[:notice] =  'You do not have enough permissions to do this'
       end
     end
 
+  def not_event_owner!
+    authenticate_user!
+    if is_owner?
+      redirect_to events_path
+      flash[:notice] =  'You do not have enough permissions to do this'
+    end
+  end
+
     def set_event_by_id
       @event = Event.find(params[:event_id])
+    end
+
+    def is_owner?
+      @event.organizer_id == current_user.id
     end
 end
 

@@ -1,0 +1,8 @@
+<%= form_tag events_path, method: 'get', id: 'events_search' do %>
+  <div class="input-group input-group-lg">
+    <%= text_field_tag :search, params[:search], class: 'form-control input-lg' %>
+    <span class="input-group-btn">
+      <%= submit_tag "Search", name: 'nil', class: "btn btn-primary btn-lg" %>
+    </span>
+  </div>
+<% end %>
