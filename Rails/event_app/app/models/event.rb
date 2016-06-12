@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
   def self.contain_tag(name)
     name = "%#{name}%"
     tag_ids = "SELECT id FROM tags WHERE (name like :name)"
-    event_ids = "SELECT event_id FROM taggings where tag_id in (#{tag_ids})"
+    event_ids = "SELECT DISTINCT(event_id) FROM taggings where tag_id in (#{tag_ids})"
     Event.where("id in (#{event_ids})", name: name)
   end
 
