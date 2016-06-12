@@ -34,4 +34,8 @@ class Event < ActiveRecord::Base
   def self.event_owner(organizer_id)
     User.find_by id: organizer_id
   end
+
+  def self.show_accepted_attendees(event_id)
+    Attendance.accepted.where(event_id: event_id)
+  end
 end

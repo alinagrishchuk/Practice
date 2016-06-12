@@ -1,0 +1,17 @@
+<h1 class="text-center"><small>Join Requests</small></h1>
+
+<% if pending_requests.present? %>
+    <% pending_requests.each do |p|%>
+        <%= image_tag avatar_url(p.user) %>
+        <%= p.user.email%>
+        <%= link_to 'Accept',
+                    event_accept_request_path(:event_id => p.event_id,
+                                              :attendance_id => p.id), :class=>"btn btn-success btn-small" %>
+        <%= link_to 'Reject',
+                    event_reject_request_path(:event_id => p.event_id,
+                                              :attendance_id => p.id), :class=>"btn btn-danger btn-small" %>
+        <br/>
+    <%end%>
+<%else%>
+    <p>No Pending Requests for this event</p>
+<%end%>

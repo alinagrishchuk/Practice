@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy,]
+
+  before_action :set_event_by_id, only:[:accept_request, :reject_request]
   before_filter :authenticate_user!
   before_action :event_owner!, only: [:edit, :update, :destroy]
 
@@ -19,6 +21,8 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event_owners = @event.organizer
+    @attendees = Event.show_accepted_attendees(@event.id)
+    @pending_requests = Attendance.pending.where(event_id: @event.id)
   end
 
   # GET /events/new
@@ -81,6 +85,26 @@ class EventsController < ApplicationController
     end
   end
 
+  def accept_request
+    @attendance = Attendance.find_by(id: params[:attendance_id]) rescue nil
+    @attendance.accept!
+    'Applicant Accepted' if @attendance.save
+    respond_to do |format|
+      format.html { redirect_to @event, notice: 'Applicant Accepted' }
+      format.json { render :show, status: :created, location: @event }
+    end
+  end
+
+  def reject_request
+    @attendance =
+        Attendance.where(params[:attendance_id]) rescue nil
+    @attendance.reject!
+    'Applicant Rejected' if @attendance.save
+    respond_to do |format|
+      format.html { redirect_to @event, notice: 'Applicant Rejected' }
+      format.json { render :show, status: :created, location: @event }
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -100,6 +124,10 @@ class EventsController < ApplicationController
         redirect_to events_path
         flash[:notice] =  'You do not have enough permissions to do this'
       end
+    end
+
+    def set_event_by_id
+      @event = Event.find(params[:event_id])
     end
 end
 

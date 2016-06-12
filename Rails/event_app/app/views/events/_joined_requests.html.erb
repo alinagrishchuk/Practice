@@ -1,0 +1,7 @@
+<h1 class="text-center"><small>Joined</small></h1>
+<% attendees.each do |a|%>
+    <%= a.user.email%>
+    <%= image_tag avatar_url(a.user) %>
+    <br>
+<%end%>
+
