@@ -45,7 +45,7 @@ class EventsController < ApplicationController
       end
     end
   end
-  
+
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update

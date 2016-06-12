@@ -1,36 +1,70 @@
-<p id="notice"><%= notice %></p>
-  <h1><small>Title </small><%= @event.title %></h1>
+<%= link_to "Join", event_join_path(event_id: @event.id),
+            :class=>"btn btn-success btn-lg pull-right" %>
 
-  <div>
+<h1 class="text-center"><small><%= @event.title %></small></h1>
+<br/>
+
+<div class="row text-spacing ">
+  <div class="col-md-2">
     <strong>Start date</strong>
+  </div>
+  <div class="col-md-10">
     <%= l @event.start_date, format: :date_format %>
   </div>
-  <div>
+
+  <div class="col-md-2">
     <strong>End date</strong>
+  </div>
+  <div class="col-md-10">
     <%= l @event.end_date, format: :date_format %>
   </div>
-  <div>
+
+  <div class="col-md-2">
     <strong>Location</strong>
+  </div>
+  <div class="col-md-10">
     <%= @event.location %>
   </div>
-  <div><strong>Agenda</strong>
+
+  <div class="col-md-2">
+    <strong>Agenda</strong>
+  </div>
+  <div class="col-md-10">
     <%= @event.agenda %>
   </div>
-  <div>
+
+  <div class="col-md-2">
     <strong>Address</strong>
+  </div>
+  <div class="col-md-10">
     <%= @event.address %>
   </div>
-  <div>
-    <label>Organized By:</label><br/>
-    <%= image_tag avatar_url(@event.organizer) %>
-    <%= @event.organizer.email %>
-    <br/>
+  <div class="col-md-2">
+    <strong>Email:</strong>
   </div>
-  <%=raw @event.tags.map { |t| link_to t.name, tag_path(t.name) }.join(', ') unless @event.all_tags.blank? %>
+  <div class="col-md-10">
+    <%= @event.organizer.email %>
+  </div>
+  <div class="col-md-2">
+    <strong>Tags</strong>
+  </div>
+  <div class="col-md-10">
+    <%=raw @event.tags.map { |t| link_to t.name, tag_path(t.name) }.join(', ') unless @event.all_tags.blank? %>
+  </div>
+  <div class="col-md-2">
+    <strong>Organized By:</strong>
+  </div>
+  <div class="col-md-10">
+    <%= image_tag avatar_url(@event.organizer) %>
+  </div>
+</div>
 
-<%= link_to "Join", event_join_path(event_id: @event.id),
-            :class=>"btn btn-success btn-small" %>
+
+
+
+
+
 <%= link_to 'Edit', edit_event_path(@event), class: 'btn' %> |
-<%= link_to 'Back', events_path %> |
-<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', events_path, class: 'btn' %> |
+<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
 

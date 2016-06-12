@@ -5,31 +5,63 @@
     </h3>
   </div>
   <div class="panel-body">
-    <div>
-      <strong>Start date</strong>
-      <%= l event.start_date, format: :date_format %>
-      <strong>End date</strong>
-      <%= l event.end_date, format: :date_format %>
+    <div class="row text-spacing">
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <strong>Start date</strong>
+        </div>
+        <div class="col-md-2">
+          <%= l event.start_date, format: :date_format %>
+        </div>
+        <div class="col-md-2">
+          <strong>End date</strong>
+        </div>
+        <div class="col-md-2">
+          <%= l event.end_date, format: :date_format %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <strong>Location</strong>
+        </div>
+        <div class="col-md-10">
+          <%= event.location %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <strong>Address</strong>
+        </div>
+        <div class="col-md-10">
+          <%= event.address %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <strong>Agenda</strong>
+        </div>
+        <div class="col-md-10">
+          <%= event.agenda %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <strong>Organizer</strong>
+        </div>
+        <div class="col-md-10">
+          <%= event.organizer.email %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <strong>Tags</strong>
+        </div>
+        <div class="col-md-10">
+          <%=raw event.tags.map { |t| link_to t.name, tag_path(t.name) }.join(', ') unless event.all_tags.blank? %>
+        </div>
+      </div>
     </div>
-    <div>
-      <strong>Location</strong>
-      <%= event.location %>
-    </div>
-    <div>
-      <strong>Address</strong>
-    </div>
-    <div>
-      <%= event.address %>
-    </div>
-    <div>
-      <strong>Agenda</strong>
-      <%= event.agenda %>
-    </div>
-    <div>
-      <strong>Organizer</strong>
-      <%= event.organizer_id %>
-    </div>
-    <%=raw event.tags.map { |t| link_to t.name, tag_path(t.name) }.join(', ') unless event.all_tags.blank? %>
     <div class="pull-right">
       <%= link_to 'Show', event, class: 'btn btn-info' %>
       <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-primary' %>
