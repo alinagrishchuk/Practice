@@ -2,7 +2,7 @@
 
 <h1>Listing Orders</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Order number</th>
@@ -10,7 +10,9 @@
       <th>Amount</th>
       <th>Credit card number</th>
       <th>Credit card expires on</th>
-      <th colspan="3"></th>
+      <th>State</th>
+      <th>Possible events</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -22,7 +24,10 @@
         <td><%= order.amount %></td>
         <td><%= order.credit_card_number %></td>
         <td><%= order.credit_card_expires_on %></td>
+        <td><%= order.state %></td>
+        <td><%= order.state_events %></td>
         <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Change state', change_state_path(order), method: :put %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

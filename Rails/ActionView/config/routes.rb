@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :orders
+
   root 'static_pages#home'
+  put 'orders/:id/change_state', to: 'orders#change_state', as: 'change_state'
 
   resources :articles
   # The priority is based upon order of creation: first created -> highest priority.

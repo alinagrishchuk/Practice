@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :change_state]
 
   # GET /orders
   # GET /orders.json
@@ -25,7 +25,6 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -47,6 +46,18 @@ class OrdersController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def change_state
+    events = @order.state_events
+    respond_to do |format|
+      if events && @order.send(events[0])
+        format.html { redirect_to @order, notice: "Order was successfully updated to state #{@order.state}." }
+        format.json { render :show, status: :ok, location: @order }
+      else
+        format.html { redirect_to order_url, notice: 'Order was not updated.' }
       end
     end
   end
