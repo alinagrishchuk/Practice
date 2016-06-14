@@ -3,4 +3,8 @@ class Board < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   has_many :pins
+  belongs_to :user
+
+  validates :title, presence: true
+
 end

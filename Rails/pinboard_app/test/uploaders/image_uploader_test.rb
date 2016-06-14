@@ -36,5 +36,5 @@ class ImageUploaderTest < MiniTest::Unit::TestCase
 
   def after_tests
   end
-  
+
 end
