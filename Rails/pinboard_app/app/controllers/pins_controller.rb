@@ -61,6 +61,18 @@ class PinsController < ApplicationController
     end
   end
 
+  def pin_post
+    @current_pin = Pin.friendly.find(params[:id])
+    @pin = @current_pin.repin_post(params[:board_id])
+    respond_to do |format|
+      if @pin.save
+        flash.now[:notice] = 'Successes'
+        format.js {}
+      else
+        format.js
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pin

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :pins
   resources :boards
+
+  post 'pin_post/:id', :to => 'pins#pin_post', :as => 'pin_post'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

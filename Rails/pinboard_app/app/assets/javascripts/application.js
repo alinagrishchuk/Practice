@@ -17,5 +17,6 @@
 //= require jquery.infinitescroll
 //= require wookmark
 //= require jquery.turbolinks
+//= require jquery.facebox
 //= require pins
 //= require turbolinks

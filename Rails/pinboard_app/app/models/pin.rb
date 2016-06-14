@@ -8,4 +8,12 @@ class Pin < ActiveRecord::Base
   belongs_to :board
 
   validates_presence_of :board
+
+  def repin_post(board_id)
+    pin = Pin.new
+    pin.name = self.name
+    pin.board_id = board_id
+    pin.image = self.image
+    pin
+  end
 end

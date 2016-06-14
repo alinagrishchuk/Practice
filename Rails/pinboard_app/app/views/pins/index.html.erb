@@ -4,6 +4,12 @@
       <li class="pin">
         <%= link_to(image_tag(pin.image.thumb.url), pin) %>
         <p>
+          <a href="#info" rel="facebox">
+            <i class="icon-share-sign"></i>Pin This
+          </a>
+        <div id="info" style="display:none;">
+        <%= render partial: "pin_post", locals: {pin: pin} %>
+      </div>
           <strong>Board:</strong><%= pin.board.title %><br/>
           <%= pin.board.title %>
         </p>
@@ -13,3 +19,9 @@
   </ul>
 </div>
 <br>
+
+<script>
+  jQuery(document).ready(function($) {
+    $('a[rel*=facebox]').facebox()
+  })
+</script>
