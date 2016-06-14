@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610101313) do
+ActiveRecord::Schema.define(version: 20160614165342) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "order_number"
+    t.string   "card_last_four"
+    t.decimal  "amount"
+    t.string   "credit_card_number"
+    t.date     "credit_card_expires_on"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

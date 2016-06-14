@@ -8,10 +8,13 @@
   <%= yield :special_script %>
 </head>
 <body>
-<% @menu = "Title text"; @item = "Some value" %>
 <%= render partial: 'shared/menu', object: @item, as: "value" %>
-<%= yield :head %>
-<%= yield %>
+<div class="container">
+  <% @menu = "Title text"; @item = "Some value" %>
+
+  <%= yield :head %>
+  <%= yield %>
+</div>
 
 </body>
 </html>
