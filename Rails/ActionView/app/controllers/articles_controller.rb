@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  layout 'samle', only: [:show]
+  layout 'sample', only: [:show]
 
 
   # GET /articles
@@ -9,7 +9,8 @@ class ArticlesController < ApplicationController
     @articles = Article.all
 
     respond_to do |format|
-      format.html { render status: :forbidden }
+      format.html {}
+      #{ render status: :forbidden }
       #{ render body: "raw" }
       # #{render inline: "<% @articles.each do |p| %><p><%= p.id %></p><% end %>"}
 

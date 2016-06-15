@@ -2,6 +2,11 @@
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="/"><%= @menu %></a>
+      <ul class="nav navbar-nav">
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li><a href="<%= orders_path %>">Order</a></li>
+        <li><a href="<%= articles_path %>">Articles</a></li>
+      </ul>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">

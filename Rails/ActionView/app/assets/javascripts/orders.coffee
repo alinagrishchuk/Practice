@@ -20,6 +20,7 @@ CreditCard =
     nubmerPattern = /^\d\d\d\d$/;
     nubmerPattern.test(number)
 
+
 jQuery ->
   $("#order_credit_card_number").blur ->
     if CreditCard.validCardNumber(@value)
@@ -32,3 +33,7 @@ jQuery ->
       $("#last_four_error").text("")
     else
       $("#last_four_error").html("invalid number!")
+
+  $("#order_credit_card_expires_on").datepicker
+    dateFormat: 'yy-mm-dd'
+
