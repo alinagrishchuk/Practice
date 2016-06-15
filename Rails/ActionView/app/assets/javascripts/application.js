@@ -15,5 +15,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery-ui
+//= require chosen-jquery
+//= require jquery.tokeninput
 //= require_tree .
 //= require turbolinks

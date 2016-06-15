@@ -6,10 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Article.delete_all
-
-500.times do
-  Article.create(title: Faker::Hipster.sentence ,body: Faker::Lorem.sentences(3).join(' '))
+if Article.count == 0
+  500.times do
+    Article.create(title: Faker::Hipster.sentence ,body: Faker::Lorem.sentences(3).join(' '))
+  end
 end
 
 
@@ -43,3 +43,14 @@ Product.create!(name: "Chunky Bacon", price: 3.99, category: Category.find_by_na
 Product.create!(name: "Flux Capacitor", price: 19.55, category: Category.find_by_name!("Other Electronics"))
 Product.create!(name: "Technodrome", price: 12.49, category: Category.find_by_name!("Toys"))
 Product.create!(name: "TextMate 2", price: 74.99, category: Category.find_by_name!("Software"))
+
+
+if Author.count == 0
+  200.times do
+    Author.create!(name: Faker::Name.name)
+  end
+
+  ["Erich Gamma", "Richard Helm", "Ralph Johnson", "John M. Vlissides"].each do |name|
+    Author.create!(name: name)
+  end
+end
