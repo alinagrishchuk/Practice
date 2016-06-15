@@ -38,6 +38,7 @@ class CategoriesController < ApplicationController
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
+        format.js {}
       else
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -66,6 +67,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
+      format.js {}
     end
   end
 
