@@ -2,6 +2,8 @@ class Author < ActiveRecord::Base
   has_many :authorships
   has_many :books, through: :authorships
 
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "invalid email format"
+
   def self.tokens query
     authors = Author.where("name like ?", "%#{query}%")
     if authors.empty?

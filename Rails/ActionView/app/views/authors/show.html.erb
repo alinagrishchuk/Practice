@@ -2,7 +2,24 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @author.name %>
+  <%= best_in_place @author, :name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= best_in_place @author, :email %>
+</p>
+<p>
+  <b>Gender:</b>
+  <%= best_in_place @author, :gender,  :as => :select, collection: [["Male", "Male"], ["Female", "Female"], ["", "Unspecified"]] %>
+</p>
+<p>
+  <b>Public profile:</b>
+  <%= best_in_place @author, :public_profile, as: :checkbox, collection: %w[No Yes] %>
+</p>
+<p>
+  <b>Bio</b>
+  <%= best_in_place @author, :bio, :as => :textarea %>
 </p>
 
 <%= link_to 'Edit', edit_author_path(@author) %> |
