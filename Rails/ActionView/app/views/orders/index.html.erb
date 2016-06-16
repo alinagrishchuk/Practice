@@ -2,7 +2,7 @@
 
 <h1>Listing Orders</h1>
 
-<%= content_tag :div, '', id: 'orders_chart', data: { orders: orders_chart_data } %>
+<%= render 'chart' %>
 
 <%= link_to 'New Order', new_order_path %>
 <table class="table">
