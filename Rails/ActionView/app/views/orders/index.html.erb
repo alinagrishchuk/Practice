@@ -30,7 +30,7 @@
         <td><%= order.state %></td>
         <td><%= order.state_events %></td>
         <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Change state', change_state_path(order), method: :put %></td>
+        <td><%= link_to 'Change state', change_state_order_path(order), method: :put %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -22,6 +22,8 @@ CreditCard =
 
 
 jQuery ->
+  console.log "orders fire!"
+  
   $("#order_credit_card_number").blur ->
     if CreditCard.validCardNumber(@value)
       $("#credit_card_number_error").text("")
@@ -38,13 +40,13 @@ jQuery ->
     dateFormat: 'yy-mm-dd'
 
 
-  Morris.Line
-    element: 'orders_chart'
-    data: $("#orders_chart").data('orders')
-    xkey: 'purchased_at'
-    ykeys: ['price', 'shipping_price', 'download_price']
-    labels: ['Total Price', 'Shipping Price', 'Download Price']
-    preUnits: '$'
+  #Morris.Line
+   # element: 'orders_chart'
+   # data: $("#orders_chart").data('orders')
+   # xkey: 'purchased_at'
+   # ykeys: ['price', 'shipping_price', 'download_price']
+   # labels: ['Total Price', 'Shipping Price', 'Download Price']
+    #preUnits: '$'
 
 
  

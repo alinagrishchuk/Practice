@@ -3,12 +3,17 @@
 <head>
   <title>ActionView</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+
+  <%= controller_assets  %>
+
   <%= csrf_meta_tags %>
+
   <%= yield :special_script %>
 </head>
-<body>
-<%= render partial: 'shared/menu', object: @item, as: "value" %>
+<body class="<%= controller_name %> <%= action_name %>">
+<%=  debug params %>
+<%= render partial: 'shared/navbar', object: @item, as: "value" %>
 <div class="container">
   <% @menu = "Title text"; @item = "Some value" %>
 
