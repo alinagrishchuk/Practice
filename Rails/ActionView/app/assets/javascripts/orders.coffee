@@ -37,3 +37,14 @@ jQuery ->
   $("#order_credit_card_expires_on").datepicker
     dateFormat: 'yy-mm-dd'
 
+
+  Morris.Line
+    element: 'orders_chart'
+    data: $("#orders_chart").data('orders')
+    xkey: 'purchased_at'
+    ykeys: ['price', 'shipping_price', 'download_price']
+    labels: ['Total Price', 'Shipping Price', 'Download Price']
+    preUnits: '$'
+
+
+ 

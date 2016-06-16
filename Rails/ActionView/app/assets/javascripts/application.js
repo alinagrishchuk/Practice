@@ -17,5 +17,7 @@
 //= require jquery-ui
 //= require chosen-jquery
 //= require jquery.tokeninput
+//= require raphael
+//= require morris
 //= require_tree .
 //= require turbolinks

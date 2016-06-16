@@ -2,14 +2,17 @@
 
 <h1>Listing Orders</h1>
 
+<%= content_tag :div, '', id: 'orders_chart', data: { orders: orders_chart_data } %>
+
+<%= link_to 'New Order', new_order_path %>
 <table class="table">
   <thead>
     <tr>
       <th>Order number</th>
-      <th>Card last four</th>
       <th>Amount</th>
-      <th>Credit card number</th>
-      <th>Credit card expires on</th>
+      <th>Purchased</th>
+      <th>Shipping</th>
+      <th>Price</th>
       <th>State</th>
       <th>Possible events</th>
       <th colspan="4"></th>
@@ -20,10 +23,10 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= order.order_number %></td>
-        <td><%= order.card_last_four %></td>
         <td><%= order.amount %></td>
-        <td><%= order.credit_card_number %></td>
-        <td><%= order.credit_card_expires_on %></td>
+        <td><%= order.purchased_at.strftime("%B %e, %Y %H:%M") %></td>
+        <td><%= order.shipping ? "Yes" : "No" %></td>
+        <td><%= number_to_currency order.price %></td>
         <td><%= order.state %></td>
         <td><%= order.state_events %></td>
         <td><%= link_to 'Show', order %></td>
@@ -34,7 +37,6 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @posts %>
 <br>
 
-<%= link_to 'New Order', new_order_path %>
