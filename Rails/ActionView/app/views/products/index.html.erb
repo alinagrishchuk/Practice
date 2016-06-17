@@ -4,17 +4,20 @@
 
 <table class="table" id="products" data-source="<%= products_url(format: "json") %>" >
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Category</th>
-      <th>Released on</th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Released on</th>
+  </tr>
   </thead>
-
-
+  <tbody>
+  <!-- #render @products  if controller.request.format.to_sym.eql? :html  -->
+  </tbody>
 </table>
 
 <br>
 
 <%= link_to 'New Product', new_product_path %>
+
+

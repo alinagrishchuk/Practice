@@ -1,4 +1,4 @@
-class ProductDatatable < AjaxDatatablesRails::Base
+class ProductDatatableV1 < AjaxDatatablesRails::Base
   include AjaxDatatablesRails::Extensions::WillPaginate
 
 
