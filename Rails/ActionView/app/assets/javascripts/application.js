@@ -9,6 +9,7 @@
 //= require raphael
 //= require morris
 //= require best_in_place.jquery-ui
+//= require dataTables/jquery.dataTables
 //= require jquery.purr
 //= require best_in_place.purr
 //= require turbolinks

@@ -4,7 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.all.includes(:category)
+    respond_to do |format|
+      format.html {}
+      format.json { render json:  ::ProductDatatable.new(view_context) }
+    end
   end
 
   # GET /products/1
@@ -72,3 +76,4 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:name, :price, :category_id, :category_name)
     end
 end
+
