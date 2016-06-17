@@ -9,7 +9,7 @@ class ProductDatatableV2
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Product.count,
-      iTotalDisplayRecords: products.total_entries,
+      iTotalDisplayRecords: total_entries,
       aaData: data
     }
   end
@@ -32,10 +32,10 @@ class ProductDatatableV2
     end
 
     def fetch_products
-      products = Product.order("#{sort_column} #{sort_direction}")
+      products = Product.joins(:category).order("#{sort_column} #{sort_direction}")
       products = products.page(page).per_page(per_page)
       if params[:sSearch].present?
-        products = products.where("name like :search or category like :search", search: "%#{params[:sSearch]}%")
+        products =  products.where("products.name like :search or categories.name like :search", search: "%#{params[:sSearch]}%")
       end
       products
     end
@@ -49,11 +49,15 @@ class ProductDatatableV2
     end
 
     def sort_column
-      columns = %w[name price category.name released_on ]
+      columns = %w[name price categories.name released_on ]
       columns[params[:iSortCol_0].to_i]
     end
 
     def sort_direction
       params[:sSortDir_0] == "desc" ? "desc" : "asc"
+    end
+
+    def total_entries
+      products.count
     end
 end
