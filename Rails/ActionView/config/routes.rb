@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :people
+  resources :states
+  resources :countries
   resources :answers
   resources :questions
   resources :surveys

@@ -1,10 +1,10 @@
+require 'csv'
+
 if Article.count == 0
   500.times do
     Article.create(title: Faker::Hipster.sentence ,body: Faker::Lorem.sentences(3).join(' '))
   end
 end
-
-
 
 if Category.count == 0
   Category.create!(name: "Beverages")
@@ -86,26 +86,50 @@ end
 
 
 
+if Order.count == 0
+  Order.delete_all
+  generator = proc do |start_time, end_time, shipping|
+    time = Time.at(rand(end_time.to_i - start_time.to_i) + start_time.to_i)
+    card_number =  Faker::Business.credit_card_number
+    price = rand(200) + 10
+    Order.create!(
+      order_number: Faker::Number.number(10),
+      card_last_four: card_number[-4,4],
+      amount: Faker::Commerce.price,
+      credit_card_number: card_number,
+      price: price,
+      credit_card_expires_on: Faker::Date.forward(100),
+      purchased_at: time,
+      shipping: rand(shipping)
+    )
+  end
 
-Order.delete_all
-generator = proc do |start_time, end_time, shipping|
-  time = Time.at(rand(end_time.to_i - start_time.to_i) + start_time.to_i)
-  card_number =  Faker::Business.credit_card_number
-  price = rand(200) + 10
-  Order.create!(
-         order_number: Faker::Number.number(10),
-         card_last_four: card_number[-4,4],
-         amount: Faker::Commerce.price,
-         credit_card_number: card_number,
-         price: price,
-         credit_card_expires_on: Faker::Date.forward(100),
-         purchased_at: time,
-         shipping: rand(shipping)
-  )
+  200.times { generator.call(10.days.ago, Time.zone.now.end_of_day, 1) }
+  500.times { generator.call(1.month.ago, Time.zone.now.end_of_day, 2) }
+  Order.create!(price: 10, purchased_at: 1.month.ago.beginning_of_day, shipping: true)
 end
 
-200.times { generator.call(10.days.ago, Time.zone.now.end_of_day, 1) }
-500.times { generator.call(1.month.ago, Time.zone.now.end_of_day, 2) }
-Order.create!(price: 10, purchased_at: 1.month.ago.beginning_of_day, shipping: true)
+
+if Country.count == 0
+  puts "Importing countries..."
+  CSV.foreach(Rails.root.join("countries.csv"), headers: true) do |row|
+    Country.create! do |country|
+      country.id = row[0]
+      country.name = row[1]
+    end
+  end
+
+  puts "Importing states..."
+  CSV.foreach(Rails.root.join("states.csv"), headers: true) do |row|
+    State.create! do |state|
+      state.name = row[0]
+      state.country_id = row[2]
+    end
+  end
+end
+
+
+
+
 
 

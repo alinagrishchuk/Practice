@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160617083032) do
+ActiveRecord::Schema.define(version: 20160618171955) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content"
@@ -61,6 +61,12 @@ ActiveRecord::Schema.define(version: 20160617083032) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string   "order_number"
     t.string   "card_last_four"
@@ -74,6 +80,17 @@ ActiveRecord::Schema.define(version: 20160617083032) do
     t.datetime "purchased_at"
     t.boolean  "shipping"
   end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "country_id"
+    t.integer  "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "people", ["country_id"], name: "index_people_on_country_id"
+  add_index "people", ["state_id"], name: "index_people_on_state_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -94,6 +111,15 @@ ActiveRecord::Schema.define(version: 20160617083032) do
   end
 
   add_index "questions", ["survey_id"], name: "index_questions_on_survey_id"
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "states", ["country_id"], name: "index_states_on_country_id"
 
   create_table "surveys", force: :cascade do |t|
     t.string   "name"
