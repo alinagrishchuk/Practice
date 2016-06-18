@@ -2,25 +2,13 @@
 
 <h1>Listing Surveys</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @surveys.each do |survey| %>
-      <tr>
-        <td><%= survey.name %></td>
-        <td><%= link_to 'Show', survey %></td>
-        <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-        <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @surveys.each do |survey| %>
+    <div class="article">
+      <h4><%= link_to survey.name, survey %></h4>
+      <%= pluralize(survey.questions.size, "Question") %>
+      <%= link_to "delete", survey, method: :delete, data: { confirm: 'Are you sure?' }%>
+    </div>
+<% end %>
 
 <br>
 
