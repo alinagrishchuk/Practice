@@ -1,25 +1,4 @@
 Rails.application.routes.draw do
-  resources :product_types
-  resources :people
-  resources :states
-  resources :countries
-  resources :answers
-  resources :questions
-  resources :surveys
-  resources :books
-  resources :authors
-  resources :products
-  resources :categories
-  resources :orders do
-    member do
-      put :change_state,  as: :change_state
-    end
-  end
-
-  root 'static_pages#home'
-
-
-  resources :articles
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

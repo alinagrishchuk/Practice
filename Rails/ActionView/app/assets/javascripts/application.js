@@ -13,6 +13,6 @@
 //= require jquery.purr
 //= require best_in_place.purr
 //= require turbolinks
-
+//= require fields_manager
 
 console.log("application.js fire!")

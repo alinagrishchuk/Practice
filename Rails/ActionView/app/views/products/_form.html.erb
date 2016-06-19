@@ -19,12 +19,7 @@
     <%= f.label :price %>
     <%= f.text_field :price, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :category_name %><br>
-    <%= f.text_field :category_name,
-                     data: { autocomplete_source: categories_path },
-                     class: "form-control" %>
-  </div>
+
   <div class="actions">
     <%= f.submit class: "btn" %>
   </div>
