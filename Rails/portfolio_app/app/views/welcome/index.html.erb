@@ -1,0 +1,40 @@
+<div class="wrapper wrapper_padding clearfix">
+  <div class="col-1 about homepage_content">
+    <h2> About </h2>
+    <hr>
+    <strong> User Stories</strong>
+    <p>
+      As a user, I want to be able to create posts so that I can share what I am learning on my blog.
+    </p>
+    <p>
+      As a user, I want to be able to edit & destroy posts, so that I can manage my blog.
+    </p>
+    <p>
+      As a user, I want to be able to write posts in markdown format so that it’s easy for me to writes posts.
+    </p>
+    <p>
+      As a user, I want to be able to highlight the various syntax of code blocks that I share on my blog.
+    </p>
+    <p>
+      As a user, I want to show the visitors and potential employers examples of my work, or stuff I’ve built.
+    </p>
+    <p>
+      As a user, I want to be able to have visitors contact me through a form on my site.
+    </p>
+    <p>
+      As a user, I want visitors to be able to leave comments on my posts.
+    </p>
+  </div>
+  <div class="col-2 homepage_content">
+    <h2>Stuff I've Written</h2>
+    <hr>
+    <% @posts.each do |post| %>
+        <h3><a href="#"><%= link_to post.title, post %></a></h3>
+        <p class="date"><%= post.created_at.strftime("%A, %b %d") %></p>
+    <% end %>
+  </div>
+  <div class="col-3 homepage_content">
+    <h2>Stuff I've Built</h2>
+    <hr>
+  </div>
+</div>
