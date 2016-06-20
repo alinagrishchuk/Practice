@@ -16,4 +16,9 @@ describe Post, type: :model do
     expect(post).not_to  be_valid
   end
 
+  it "generate a slug"  do
+    post = create(:post)
+    expect(post.title).to eq post.title
+  end
+
 end
